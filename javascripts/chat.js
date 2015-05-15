@@ -6,7 +6,6 @@ function setNick() {
 	} else {
     document.getElementById("nickchooser").style.display = "none";
     document.getElementById("chat-body").style.display = "block";
-    $("#message").mathquill().focus();
   }
 }
 
