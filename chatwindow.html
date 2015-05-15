@@ -5,15 +5,15 @@
 	<meta charset="UTF-8">
 	<link rel="icon" type="image/x-icon" href="images/logo.png" />
 	  
-	<!-- Bootstrap stuff ------------------------------------------------------ -->  
+	<!-- Bootstrap and jQuery -->  
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<!-- ------------------------------------------------------------------- -->
-	<script src="js/mathquill.min.js"></script>
-	<script src="js/chat.js"></script>
-	<style> @import url("css/mathquill.css")</style>
+
+	<script src="javascripts/mathquill.min.js"></script>
+	<script src="javascripts/chat.js"></script>
+	<style> @import url("stylesheets/mathquill.css")</style>
 	<script>
 		function resizeChat() {
 			document.getElementById("history").style.height = window.innerHeight - $("#chatHeading").height() - $("#messageArea").height()
@@ -88,7 +88,7 @@
 				<div class="input-group input-group-sm">
 					<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
 					<span class="input-group-btn">
-						<input value="Sänd" class="btn btn-default" onclick="sendMessage()" type="button">
+						<input value="Send" class="btn btn-default" onclick="sendMessage()" type="button">
 					</span>
 				</div>
 			</form>
@@ -100,7 +100,7 @@
 	<form>
 		<div class="form-group panel-body" id="nickchooser">
 			
-			<label for="nickname">Välj chattnamn:</label>
+			<label for="nickname">Choose nickname:</label>
 			<div class="input-group input-group-sm">
 				<input type="text" class="form-control" id="nickname" onkeydown="checkEnterSetNick(event)">
 				<span class="input-group-btn">
