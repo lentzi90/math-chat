@@ -69,7 +69,7 @@ function checkEnterSendMessage(event) {
 
 // Open chat in window
 function chatWindow() {
-	var chatWindow = window.open("/karen/special/sigma/chatwindow.php","Chat", "width=500, height=500");
+	var chatWindow = window.open("chatwindow.html","Chat", "width=500, height=500");
 	$("#collapseChat").collapse("hide");
 	toggleChat();
 }
