@@ -8,6 +8,15 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- bootstrap, jquery end -->
+    <script src="javascript/mathquill.min.js"></script>	
+    <script src="javascript/chat.js"></script>
+    <style> @import url("css/mathquill.css")</style>   
+    <style> @import url("css/style.css")</style>
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -32,6 +41,68 @@
 <a id="math-chat" class="anchor" href="#math-chat" aria-hidden="true"><span class="octicon octicon-link"></span></a>Math-chat</h3>
 
 <p>This page is used as a demo for the math-chat client. There is no server backend so you can only chat with yourself. :)</p>
+
+<!-- The chat -->
+<div class="chat hidden-xs" id="chat">
+	<div class="panel panel-default" id="chatpanel">
+	
+		<!-- chat heading with buttons -->
+		<div class="panel-heading">
+			<span class="panel-title">Chat</span>
+
+	   		<div class="btn-group pull-right" data-toggle="tooltip" title="Detach">
+				<a role="button" class="btn btn-default btn-sm" href="#" onclick="chatWindow()">
+					<span class="glyphicon glyphicon-new-window"></span>
+				</a>
+			</div>
+			<div class="btn-group pull-right" data-toggle="tooltip" title="Minimize">
+				<a role="button" onclick="toggleChat()" class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-parent="#chat" href="#collapseChat" aria-expanded="false">
+					<span class="glyphicon glyphicon-minus"></span>
+				</a>
+			</div>
+			<div class="btn-group pull-right" data-toggle="tooltip" title="Help">
+				<a role="button" class="btn btn-default btn-sm" href="#">
+					<span class="glyphicon glyphicon-question-sign"></span>
+				</a>
+			</div>
+	
+		</div> <!-- heading end -->
+		
+		<!-- collapsible chat area -->
+		<div id="collapseChat" class="panel-collapse collapse">
+			
+			<!-- nickname chooser -->
+			<div class="form-group panel-body" id="nickchooser">
+				
+				<label for="nickname">Choose nickname:</label>
+				<div class="input-group input-group-sm">
+					<input type="text" class="form-control" id="nickname" onkeydown="checkEnterSetNick(event)">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" onclick="setNick()">Ok</button>
+					</span>
+				</div>
+			</div>
+
+			
+			<!-- chat history and message area -->
+			<div id="chat-body" style="display: none;">
+				<div class="panel-body" id="history"></div>
+				<div class="panel-footer">
+					<div class="input-group input-group-sm">
+						<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
+						<span class="input-group-btn">
+							<input value="Send" class="btn btn-default" onclick="sendMessage()" type="button">
+						</span>
+					</div>
+				</div>
+			</div>
+		
+		</div> <!-- collapsible area end -->
+	
+	</div> <!-- chat panel -->
+	
+</div> <!-- chat end -->
+
 
 <h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
