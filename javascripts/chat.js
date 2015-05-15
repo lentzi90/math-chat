@@ -23,6 +23,7 @@ function sendMessage() {
 	$('#history').append('<div class="bg-info">'+'['+dateStr+'] '+nickname+':</div>');
 	$('#history').append('<div id="box'+count+'" ></div>');
 	$('#box'+count).append(message);
+	$('.mathquill-embedded-latex').mathquill('revert');
 	$('.mathquill-embedded-latex').mathquill();
 
 	$('#message').mathquill('latex', '');
