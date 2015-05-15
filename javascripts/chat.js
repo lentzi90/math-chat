@@ -71,5 +71,4 @@ function checkEnterSendMessage(event) {
 function chatWindow() {
 	var chatWindow = window.open("chatwindow.html","Chat", "width=500, height=500");
 	$("#collapseChat").collapse("hide");
-	toggleChat();
 }
