@@ -1,0 +1,103 @@
+body {
+	background-image:url(../images/fractal4k.jpg);
+	padding-bottom: 70px;
+}
+
+ 
+.footer { 
+  background-color: #626262;
+  color: orange;
+}
+
+
+
+
+#logo {
+  text-align: center;
+  color: black;
+  padding: 5px;
+}
+
+.navbar-inverse .navbar-brand {
+	color: orange;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus 
+{
+	background-color: orange;
+}
+
+.clickable-row {
+	cursor: pointer;
+}
+
+/* Bilderna på styrelsen */
+.card {
+   background-color: orange;
+}
+.card img {
+	width: 100%;
+}
+
+#modal-image {
+	max-height: 70vh;
+}
+
+a, a:hover {
+	color: orange;
+	font-weight: bold;
+}
+
+#mathpanel {
+	position: fixed;
+	bottom: 0;
+	right: 50%;
+}
+
+/* -----inställningar för chatten ------------*/
+#chat {
+	position: fixed;
+	right: 0px;
+	bottom: 0%;
+	width: 250px;
+	z-index: 10;
+}
+
+#chat .panel-body
+{
+    overflow-y: auto;
+    max-height: 250px;
+    height: 250px;
+}
+#chatpanel {
+	margin-bottom: 0;
+}
+
+#chat .collapsing {
+	max-height: 300px;
+}
+
+
+.mathquill-rendered-math * {
+    box-sizing: content-box;
+    top: auto;
+}
+
+.mathquill-editable {
+	display: block;
+}
+
+.mathquill-textbox textarea{
+	position: absolute;
+	clip: rect(1em 1em 1em 1em);
+}
+
+.emathdisplaymode .emdisplaymode-content {
+	width: 100%;
+}
+
+#message {
+	height: auto;
+	overflow: inherit;
+}
+/* ------------------------------------------*/
