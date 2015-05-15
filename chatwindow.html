@@ -84,31 +84,26 @@
 		</div>
 		
 		<div class="panel-footer" id="messageArea">
-			<form>
-				<div class="input-group input-group-sm">
-					<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
-					<span class="input-group-btn">
-						<input value="Send" class="btn btn-default" onclick="sendMessage()" type="button">
-					</span>
-				</div>
-			</form>
-
+			<div class="input-group input-group-sm">
+				<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
+				<span class="input-group-btn">
+					<input value="Send" class="btn btn-default" onclick="sendMessage()" type="button">
+				</span>
+			</div>
   		</div>			
 	</div>
 	
 	<!-- nickname chooser -->
-	<form>
-		<div class="form-group panel-body" id="nickchooser">
+	<div class="form-group panel-body" id="nickchooser">
 			
-			<label for="nickname">Choose nickname:</label>
-			<div class="input-group input-group-sm">
-				<input type="text" class="form-control" id="nickname" onkeydown="checkEnterSetNick(event)">
-				<span class="input-group-btn">
-					<button type="button" class="btn btn-default" onclick="setNick()">Ok</button>
-				</span>
-			</div>
+		<label for="nickname">Choose nickname:</label>
+		<div class="input-group input-group-sm">
+			<input type="text" class="form-control" id="nickname" onkeydown="checkEnterSetNick(event)">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default" onclick="setNick()">Ok</button>
+			</span>
 		</div>
-	</form>
+	</div>
 
 	
 </div> <!-- chat end -->
