@@ -22,7 +22,7 @@ function sendMessage() {
 
 	$('#history').append('<div class="bg-info">'+'['+dateStr+'] '+nickname+':</div>');
 	$('#history').append('<div>'+message+'</div>');
-	$('#history .mathquill-embedded-latex').mathquill();
+	$('#history .mathquill-embedded-latex').mathquill('redraw');
 
 	$('#message').mathquill('latex', '');
 	
