@@ -8,7 +8,7 @@ function setNick() {
     document.getElementById("chat-body").style.display = "block";
   }
 }
-var count = 0; 
+
 function sendMessage() {
 	//var message = jQuery('#message').html();
 	var message = extractMessage();
@@ -21,14 +21,12 @@ function sendMessage() {
 	             + now.getSeconds();
 
 	$('#history').append('<div class="bg-info">'+'['+dateStr+'] '+nickname+':</div>');
-	$('#history').append('<div id="box'+count+'" ></div>');
-	$('#box'+count).append(message);
+	message = '<div>'+message+'</div>';
+	$('#history').append(message);
 	$('.mathquill-embedded-latex').mathquill('revert');
 	$('.mathquill-embedded-latex').mathquill();
 
 	$('#message').mathquill('latex', '');
-	
-	count = count+1;
 	
 	// Scroll to bottom
 	$("#history").scrollTop($("#history")[0].scrollHeight);
