@@ -58,7 +58,7 @@
 			// check message length
 			if(strlen($message) > 600) {
 				// message too long
-				$message = "<div>Meddelandet är för långt för att visa!</div>";
+				$message = "<div>This message was too long!</div>";
 			}
 			
 			//add nickname and timestamp
