@@ -1,37 +1,174 @@
+var nickname = "";
+
+$.ajaxSetup({ cache: false });
+var chat =  new Chat();
+var instanse = false;
+chat.getState();
+
+function Chat () {
+    this.update = updateChat;
+    this.send = sendChat;
+    this.getState = getStateOfChat;
+}
+
+//gets the state of the chat
+function getStateOfChat() {
+	if(!instanse){
+		instanse = true;
+		$.ajax({
+			type: "POST",
+			url: "path/to/chat-server.php",
+			data: {'function': 'getState'},
+			dataType: "json",	
+			success: function(data) {state = data.state;instanse = false;}
+		});
+	}	
+}
+
+//Updates the chat
+function updateChat() {
+	if(!instanse){
+		instanse = true;
+		$.ajax({
+			type: "POST",
+			url: "path/to/chat-server.php",
+			data: {'function': 'update','state': state},
+			dataType: "json",
+			success: function(data) {
+				if(data.text){
+					$('#history').append(data.text);
+					// update mathquill content in message
+					$('#history .mathquill-embedded-latex').mathquill('revert');
+					$('#history .mathquill-embedded-latex').mathquill();
+					// scrolla ner
+					scrollToBottom();
+				}
+
+				instanse = false;
+				state = data.state;
+			}
+		});
+	}
+	else {
+		setTimeout(updateChat, 1500);
+	}
+}
+
+//send the message to server
+function sendChat(message, nickname) { 
+	$.ajax({
+		type: "POST",
+		url: "path/to/chat-server.php",
+		data: {'function': 'send','message': message,'nickname': nickname},
+		dataType: "html",
+		success: function(data){
+			updateChat();
+		}
+	});
+}
+
+// Send message
+// TODO move this to chat.send
+function sendMessage() {
+	var message = extractMessage();
+	
+	// control message length
+	if (message.length > 500) {
+		alert("The mesage is too long! Please split it up.");
+		return;
+	}
+	else {
+		// clear the input field
+		$('#message').mathquill('latex', '');
+		
+		message = '<div>'+message+'</div>';
+		chat.send(message, nickname);
+	
+		return;
+	}
+}
+
+// TODO Make this obsolete!
+function getMessages() {
+	$("#history").load("path/to/chatlog.txt", function(){
+		// update mathquill content in message
+		$('#history .mathquill-embedded-latex').mathquill();
+		// scrolla ner
+		scrollToBottom();
+	});
+}
+
+// Open chat in window
+function chatWindow() {
+	var chatWindow = window.open("path/to/chatwindow.html","Chat", "width=500, height=500");
+	$("#collapseChat").collapse("hide");
+	toggleChat();
+}
+
+function checkNickname() {
+	if (nickname != "") {
+		document.getElementById("nickchooser").style.display = "none";
+		document.getElementById("chat-body").style.display = "block";
+		getMessages(); // fill the chat with history
+		setInterval(updateChat, 1000);
+	}
+}
+
 // Set nickname and display chat
 function setNick() {
 	nickname = document.getElementById("nickname").value;
 	if (nickname == "") {
-		alert("Please pick a nickname!");
-	} else {
-    document.getElementById("nickchooser").style.display = "none";
-    document.getElementById("chat-body").style.display = "block";
-  }
+		alert("Fyll i chattnamn!");
+		return;
+	}
+	else {
+		$.ajax({ // JQuery ajax function
+			type: "POST", // Submitting Method
+			url: 'path/to/chat-login.php',
+			data: 'nickname='+ nickname, // the data that will be sent
+			dataType: "html", // type of returned data
+			success: function(data) { // if ajax function results success
+				if (data == 0) { // if the returned data equal 0 something went wrong!
+					alert("Something went wrong! Try reloading.");
+				} else { // if the reurned data not equal 0
+					// nickname is set, continue...
+					document.getElementById("nickchooser").style.display = "none";
+					document.getElementById("chat-body").style.display = "block";
+					getMessages(); // fill the chat with history
+					setInterval(updateChat, 1000);
+				}
+			}
+		});
+	}
 }
 
-function sendMessage() {
-	//var message = jQuery('#message').html();
-	var message = extractMessage();
-	var now = new Date();
-	var MyDateString;
-	
-	// slice(-2) takes the last 2 chars from the string so "019" becomes "19"
-	var dateStr = ('0' + now.getHours()).slice(-2) + ':'
-	             + ('0' + (now.getMinutes()+1)).slice(-2) + ':'
-	             + now.getSeconds();
+// toggle chat minimization
+function toggleChat() {
+	// make sure the chat is scrolled down
+	window.setTimeout(scrollToBottom, 1000);
+	// let the server know what state the chat is in
+	// to make it possible to keep the state between pages
+	$.ajax({
+		type: "POST",
+		url: "path/to/chat-login.php",
+		data: {'chatmode': 'toggle'},
+		dataType: "json",
+		success: function(data){
+			
+		}
+	});
+}
 
-	$('#history').append('<div class="bg-info">'+'['+dateStr+'] '+nickname+':</div>');
-	message = '<div>'+message+'</div>';
-	$('#history').append(message);
-	$('.mathquill-embedded-latex').mathquill('revert');
-	$('.mathquill-embedded-latex').mathquill();
+function checkEnterSendMessage(event) {
+	if(event.keyCode == 13) {
+   		sendMessage();
+ 	}
+}
 
-	$('#message').mathquill('latex', '');
-	
-	// Scroll to bottom
-	$("#history").scrollTop($("#history")[0].scrollHeight);
-	
-	return;
+function checkEnterSetNick(event) {
+	if(event.keyCode == 13) {
+   		setNick();
+ 	}
 }
 
 // extract the message from the mathquill-textbox
@@ -55,20 +192,14 @@ function extractMessage() {
 	return msg;
 }
 
-function checkEnterSetNick(event) {
-	if(event.keyCode == 13) {
-   	setNick();
- 	}
+
+
+function scrollToBottom() {
+	$("#history").scrollTop($("#history")[0].scrollHeight+3);
 }
 
-function checkEnterSendMessage(event) {
-	if(event.keyCode == 13) {
-   	sendMessage();
- 	}
-}
+ // check if nickname already exist, if so, display chat
+jQuery(document).ready(function($) {
+	checkNickname();
+});
 
-// Open chat in window
-function chatWindow() {
-	var chatWindow = window.open("chatwindow.html","Chat", "width=500, height=500");
-	$("#collapseChat").collapse("hide");
-}
