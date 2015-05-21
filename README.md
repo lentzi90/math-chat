@@ -17,6 +17,7 @@ To include Math-chat on your webpage you need the following:
 - jQuery
 - Bootstrap
 - MathQuill
+
 Include jQuery and Bootstrap like this:
 ```
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -31,8 +32,8 @@ Then include MathQuill (instructions [here](https://github.com/mathquill/mathqui
 Remember to add the fonts for MathQuill to the server!
 
 And last include [chat.js][] and [style.css][]
-[chat.js](https://github.com/lentzi90/math-chat/blob/master/javascripts/chat.js)
-[style.css](https://github.com/lentzi90/math-chat/blob/master/stylesheets/style.css)
+[chat.js]: https://github.com/lentzi90/math-chat/blob/master/javascripts/chat.js
+[style.css]: https://github.com/lentzi90/math-chat/blob/master/stylesheets/style.css
 ```
 <script src="javascripts/chat.js"></script>
 <link rel="stylesheet" href="stylesheets/style.css"
@@ -41,9 +42,9 @@ And last include [chat.js][] and [style.css][]
 
 Now add the content of [chat.html][] to your webpage somewhere in the `<body>` and serve [chat-server.php][] as well as [chat-login.php][].
 
-[chat.html](https://github.com/lentzi90/math-chat/blob/master/html/chat.html)
-[chat-server.php](https://github.com/lentzi90/math-chat/blob/master/chat_server/chat-server.php)
-[chat-login.php](https://github.com/lentzi90/math-chat/blob/master/chat_server/chat-login.php)
+[chat.html]: https://github.com/lentzi90/math-chat/blob/master/html/chat.html
+[chat-server.php]: https://github.com/lentzi90/math-chat/blob/master/chat_server/chat-server.php
+[chat-login.php]: https://github.com/lentzi90/math-chat/blob/master/chat_server/chat-login.php
 
 **OBS!** The path to `chat-server.php` and `chat-login.php` need to be set manually in `chat.js` as of now.
 I will try to make this much simpler in the future!
