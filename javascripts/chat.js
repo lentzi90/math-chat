@@ -1,4 +1,6 @@
 var nickname = "";
+var chatServerPath = "../chat_server/chat-server.php";
+var chatLoginPath = "../chat_server/chat-login.php";
 
 $.ajaxSetup({ cache: false });
 var chat =  new Chat();
@@ -17,7 +19,7 @@ function getStateOfChat() {
 		instanse = true;
 		$.ajax({
 			type: "POST",
-			url: "path/to/chat-server.php",
+			url: chatServerPath,
 			data: {'function': 'getState'},
 			dataType: "json",	
 			success: function(data) {state = data.state;instanse = false;}
@@ -31,7 +33,7 @@ function updateChat() {
 		instanse = true;
 		$.ajax({
 			type: "POST",
-			url: "path/to/chat-server.php",
+			url: chatServerPath,
 			data: {'function': 'update','state': state},
 			dataType: "json",
 			success: function(data) {
@@ -58,7 +60,7 @@ function updateChat() {
 function sendChat(message, nickname) { 
 	$.ajax({
 		type: "POST",
-		url: "path/to/chat-server.php",
+		url: chatServerPath,
 		data: {'function': 'send','message': message,'nickname': nickname},
 		dataType: "html",
 		success: function(data){
@@ -90,7 +92,7 @@ function sendMessage() {
 
 // TODO Make this obsolete!
 function getMessages() {
-	$("#history").load("path/to/chatlog.txt", function(){
+	$("#history").load(chatLoginPath, function(){
 		// update mathquill content in message
 		$('#history .mathquill-embedded-latex').mathquill();
 		// scrolla ner
@@ -100,7 +102,7 @@ function getMessages() {
 
 // Open chat in window
 function chatWindow() {
-	var chatWindow = window.open("path/to/chatwindow.html","Chat", "width=500, height=500");
+	var chatWindow = window.open("../chatwindow.html","Chat", "width=500, height=500");
 	$("#collapseChat").collapse("hide");
 	toggleChat();
 }
@@ -124,7 +126,7 @@ function setNick() {
 	else {
 		$.ajax({ // JQuery ajax function
 			type: "POST", // Submitting Method
-			url: 'path/to/chat-login.php',
+			url: chatLoginPath,
 			data: 'nickname='+ nickname, // the data that will be sent
 			dataType: "html", // type of returned data
 			success: function(data) { // if ajax function results success
@@ -150,7 +152,7 @@ function toggleChat() {
 	// to make it possible to keep the state between pages
 	$.ajax({
 		type: "POST",
-		url: "path/to/chat-login.php",
+		url: chatLoginPath,
 		data: {'chatmode': 'toggle'},
 		dataType: "json",
 		success: function(data){
