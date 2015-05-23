@@ -11,19 +11,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-	<script src="javascripts/mathquill.min.js"></script>
-	<script src="javascripts/chat.js"></script>
-	<link rel="stylesheet" href="stylesheets/mathquill.css">
-	<script>
-		function resizeChat() {
-			document.getElementById("history").style.height = window.innerHeight - $("#chatHeading").height() - $("#messageArea").height()
-				- parseInt($("#history").css("padding-top")) - 2*parseInt($("#history").css("padding-bottom"))+"px";
-			scrollToBottom();
-		}
-		jQuery(document).ready(function($) {
-			resizeChat();
-		});
-	</script>
+	<script src="../javascripts/mathquill.min.js"></script>
+	<script src="../javascripts/chat.js"></script>
+	<link rel="stylesheet" href="../stylesheets/mathquill.css">
 	
 	<style>
     html, body, .chat {
@@ -106,7 +96,16 @@
 	
 </div> <!-- chat end -->
 
-
+	<script>
+		function resizeChat() {
+			document.getElementById("history").style.height = window.innerHeight - $("#chatHeading").height() - $("#messageArea").height()
+				- parseInt($("#history").css("padding-top")) - 2*parseInt($("#history").css("padding-bottom"))+"px";
+			scrollToBottom();
+		}
+		jQuery(document).ready(function($) {
+			resizeChat();
+		});
+	</script>
 </body>
 
 </html> 

@@ -1,6 +1,7 @@
 var nickname = "";
 var chatServerPath = "../chat_server/chat-server.php";
 var chatLoginPath = "../chat_server/chat-login.php";
+var chatLogPath = "../chat_server/chatlog.txt";
 
 $.ajaxSetup({ cache: false });
 var chat =  new Chat();
@@ -62,7 +63,7 @@ function sendChat(message, nickname) {
 		type: "POST",
 		url: chatServerPath,
 		data: {'function': 'send','message': message,'nickname': nickname},
-		dataType: "html",
+		dataType: "json",
 		success: function(data){
 			updateChat();
 		}
@@ -92,17 +93,21 @@ function sendMessage() {
 
 // TODO Make this obsolete!
 function getMessages() {
-	$("#history").load(chatLoginPath, function(){
+	$("#history").load(chatLogPath, function(){
 		// update mathquill content in message
 		$('#history .mathquill-embedded-latex').mathquill();
 		// scrolla ner
 		scrollToBottom();
+		if (typeof resizeChat !== 'undefined') {
+    		// if resize chat is defined, we should resize the chat!
+    		resizeChat();
+		}
 	});
 }
 
 // Open chat in window
 function chatWindow() {
-	var chatWindow = window.open("../chatwindow.html","Chat", "width=500, height=500");
+	var chatWindow = window.open("chatwindow.html","Chat", "width=500, height=500");
 	$("#collapseChat").collapse("hide");
 	toggleChat();
 }

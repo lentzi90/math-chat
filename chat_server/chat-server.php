@@ -71,7 +71,8 @@
 				}
 				$chatlog = fopen('chatlog.txt', 'a');
 				// write to file with stripslashes to produce plain html
-				fwrite($chatlog, stripslashes($message) . "\n");
+				//
+				fwrite($chatlog, $message . "\n");
 				fclose($chatlog);
 			}
 			echo "server got message";
