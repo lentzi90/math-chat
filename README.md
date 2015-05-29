@@ -45,6 +45,3 @@ Now add the content of [chat.html][] to your webpage somewhere in the `<body>` a
 [chat.html]: https://github.com/lentzi90/math-chat/blob/master/html/chat.html
 [chat-server.php]: https://github.com/lentzi90/math-chat/blob/master/chat_server/chat-server.php
 [chat-login.php]: https://github.com/lentzi90/math-chat/blob/master/chat_server/chat-login.php
-
-**OBS!** The path to `chat-server.php` and `chat-login.php` need to be set manually in `chat.js` as of now.
-I will try to make this much simpler in the future!
