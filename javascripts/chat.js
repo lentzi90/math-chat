@@ -143,6 +143,7 @@ function setNick() {
 					document.getElementById("chat-body").style.display = "block";
 					getMessages(); // fill the chat with history
 					setInterval(updateChat, 1000);
+					$("#message").mathquill('latex', '').mousedown().mouseup();
 				}
 			}
 		});
