@@ -1,7 +1,8 @@
-var chatServerPath = "/path/to/chat-server.php";
-var chatLogPath = "/path/to/chatlog.txt";
-var chatWindowPath = "/path/to/chatwindow.html";
+var chatServerPath = "/chat_server/chat-server.php";
+var chatLogPath = "/chat_server/chatlog.txt";
+var chatWindowPath = "/html/chatwindow.html";
 
+var nickname = "Test";
 
 $.ajaxSetup({ cache: false });
 var chat =  new Chat();
@@ -10,7 +11,7 @@ var instanse = false;
 chat.getState();
 
 
-jQuery(document).ready(function($) {
+$(window).load( function() {
   // check if nickname already exist, if so, display chat
   chat.checkNick();
   // remember minimization
