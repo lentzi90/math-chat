@@ -1,43 +1,78 @@
 <!-- The chat -->
 <div class="chat hidden-xs" id="chat">
 	<div class="panel panel-default" id="chatpanel">
-	
+
 		<!-- chat heading with buttons -->
 		<div class="panel-heading">
 			<span class="panel-title">Chat</span>
-      <div class="btn-group pull-right" data-toggle="tooltip" title="Detach">
+
+			<div class="btn-group pull-right" data-toggle="tooltip" title="Open in new window">
 				<a role="button" class="btn btn-default btn-sm" href="#" onclick="chatWindow()">
 					<span class="glyphicon glyphicon-new-window"></span>
 				</a>
 			</div>
 			<div class="btn-group pull-right" data-toggle="tooltip" title="Minimize">
-				<a role="button" class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-parent="#chat" href="#collapseChat" aria-expanded="false">
+				<a role="button" onclick="toggleChat()" class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-parent="#chat" href="#collapseChat" aria-expanded="false">
 					<span class="glyphicon glyphicon-minus"></span>
 				</a>
 			</div>
-			<div class="btn-group pull-right" data-toggle="tooltip" title="Help">
-				<a role="button" class="btn btn-default btn-sm" href="#">
-					<span class="glyphicon glyphicon-question-sign"></span>
+			<div class="btn-group pull-right" data-toggle="tooltip" title="Settings">
+				<a role="button" onclick="showSettings()" class="btn btn-default btn-sm" id="settings-btn">
+					<span class="glyphicon glyphicon-cog"></span>
 				</a>
 			</div>
-	
+
 		</div> <!-- heading end -->
-		
+
 		<!-- collapsible chat area -->
-		<div id="collapseChat" class="panel-collapse collapse">
-			
+		<div class="panel-collapse collapse" id="collapseChat">
+
 			<!-- nickname chooser -->
-			<div class="form-group panel-body" id="nickchooser">
-				
-				<label for="nickname">Choose nickname:</label>
-				<div class="input-group input-group-sm">
-					<input type="text" class="form-control" id="nickname" onkeydown="checkEnterSetNick(event)">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" onclick="setNick()">Ok</button>
-					</span>
+			<form id="nickchooser">
+
+				<div class="panel-body">
+
+					<div class="form-group">
+						<label for="nickname">Nickname:</label>
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control" id="nick" onkeydown="checkEnterSetNick(event)">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" onclick="setNick()">Ok</button>
+							</span>
+						</div>
+					</div>
+
+				</div> <!-- panel body -->
+
+				<div class="panel-footer">
+					<a role="button" class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Help">
+						<span class="glyphicon glyphicon-question-sign"></span>
+					</a>
 				</div>
-			</div>
-			
+
+			</form> <!-- nickchooser -->
+
+			<!-- Settings -->
+			<form id="settings" style="display: none;">
+				<div class="panel-body">
+					<div class="form-group">
+						<label for="nickname">Nickname:</label>
+						<input type="text" class="form-control" id="settings-nick">
+					</div>
+
+					<div class="form-group">
+						<button type="button" class="btn btn-default" onclick="showChat()">Back</button>
+						<button type="button" class="btn btn-primary pull-right" onclick="applySettings()">Apply</button>
+					</div>
+				</div>
+
+				<div class="panel-footer">
+					<a role="button" class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Help">
+						<span class="glyphicon glyphicon-question-sign"></span>
+					</a>
+				</div>
+			</form> <!-- settings -->
+
 			<!-- chat history and message area -->
 			<div id="chat-body" style="display: none;">
 				<div class="panel-body" id="history"></div>
@@ -50,9 +85,9 @@
 					</div>
 				</div>
 			</div>
-		
+
 		</div> <!-- collapsible area end -->
-	
+
 	</div> <!-- chat panel -->
-	
+
 </div> <!-- chat end -->
