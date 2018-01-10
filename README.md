@@ -6,13 +6,13 @@ The server side is *very* basic as of now and written in php with inspiration fr
 
 A demo can be found here: http://lentzi90.github.io/math-chat/
 
-##Purpose
+## Purpose
 I started Math-chat as part of a school project. My goal was to update the hompage for math students at Åbo Akademi University (Finland) and add a basic chat that would enable straight forward communication of math related things.
 The school project was aimed mostly at the user interface so the server side was not my highest priority to begin with. I "chose" php for the server simply because the webpage is hosted on a php server.
 
 This project should be considered experimental and not suited for any critical applications.
 
-##Usage
+## Usage
 To include Math-chat on your webpage you need the following:
 - jQuery
 - Bootstrap
