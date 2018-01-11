@@ -1,5 +1,4 @@
-var chatLogPath = "/chat_server/chatlog.txt";
-var chatWindowPath = "/html/chatwindow.html";
+var chatWindowPath = "/index.html";
 
 var nickname = "Test";
 
