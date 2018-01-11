@@ -13,40 +13,8 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 	<script src="javascripts/mathquill.min.js"></script>
-	<script src="javascripts/chat.js"></script>
 	<link rel="stylesheet" href="stylesheets/mathquill.css">
-
-	<script>
-	// function extractMessage() {
-	//   var spans = document.getElementById("message").children;
-	//   var msg = "";
-	//   var i;
-	//   for (i = 0; i <	spans.length; i++) {
-	//     if ($(spans[i]).hasClass("textarea")) {
-	//       // do nothing
-	//     }
-	//     else if ($(spans[i]).hasClass("mathquill-rendered-math")) {
-	//       //extract latex
-	//       var latex = $(spans[i]).mathquill('latex');
-	//       msg += "<span class='mathquill-embedded-latex'>"+latex+"</span>";
-	//     }
-	//     else {
-	//       msg += spans[i].innerHTML;
-	//     }
-	//   }
-	//   return msg;
-	// }
-
-	// function resizeChat() {
-	// 	document.getElementById("history").style.height =
-	// 	window.innerHeight - $("#chatHeading").height() - $("#messageArea").height() -
-	// 	parseInt($("#history").css("padding-top")) - 2*parseInt($("#history").css("padding-bottom"))+"px";
-	// 	scrollToBottom();
-	// }
-	// $(window).load( function() {
-	// 	resizeChat();
-	// });
-	</script>
+	<script src="javascripts/chat.js"></script>
 
 	<style>
 	html, body, .chat {
@@ -128,26 +96,6 @@
 							</span>
 						</div>
 					</form>
-					<!-- <script>
-					$(function () {
-						var socket = io();
-						// Sending messages
-						$('#message-form').submit(function(){
-							console.log("sending message using socket.io");
-							socket.emit('chat message', extractMessage());
-							$('#message').mathquill('latex', '');
-							return false;
-						});
-						// Receiving messages
-						socket.on('chat message', function(msg){
-							$('#history').append($('<div>').html(msg));
-							$('#history .mathquill-embedded-latex').mathquill('revert');
-							$('#history .mathquill-embedded-latex').mathquill();
-							window.scrollTo(0, document.body.scrollHeight);
-						});
-					});
-					</script> -->
-
 				</div>
 			</div> <!-- chat-body -->
 

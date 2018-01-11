@@ -16,8 +16,7 @@ $(window).load( function() {
     $(function () {
         var socket = io();
         // Sending messages
-        $('#message-form').submit(function(){
-            console.log("sending message using socket.io");
+        $('#message-form').submit(function() {
             socket.emit('chat message', extractMessage());
             $('#message').mathquill('latex', '');
             return false;
@@ -34,30 +33,8 @@ $(window).load( function() {
 
 function Chat () {
     // methods
-    this.send = sendMessage;
     this.checkNick = checkNickname;
     this.checkMin = checkMinimized;
-}
-
-// Send message
-
-function sendMessage() {
-    var message = extractMessage();
-
-    // control message length
-    if (message.length > 500) {
-        alert("The message is too long! Please split it up!");
-        return;
-    }
-    else {
-        // clear the input field
-        $('#message').mathquill('latex', '');
-
-        message = '<div>'+message+'</div>';
-        chat.send(message, nickname);
-
-        return;
-    }
 }
 
 function getMessages() {
