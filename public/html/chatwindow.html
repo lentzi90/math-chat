@@ -5,15 +5,16 @@
 	<meta charset="UTF-8">
 	<link rel="icon" type="image/x-icon" href="images/logo.png" />
 
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<!-- Bootstrap and jQuery -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-	<script src="../javascripts/mathquill.min.js"></script>
-	<script src="../javascripts/chat.js"></script>
-	<link rel="stylesheet" href="../stylesheets/mathquill.css">
+	<script src="javascripts/mathquill.min.js"></script>
+	<script src="javascripts/chat.js"></script>
+	<link rel="stylesheet" href="stylesheets/mathquill.css">
 
 	<script>
 	function resizeChat() {
@@ -92,21 +93,36 @@
 			</div>
 
 			<!-- chat history and message area -->
-			<div id="chat-body" style="display:none">
+			<div id="chat-body">
 
 				<div class="panel-body" id="history">
 					<!-- Here goes the chat history -->
 				</div>
 
 				<div class="panel-footer" id="messageArea">
-					<form>
+					<form id=message-form>
 						<div class="input-group input-group-sm">
 							<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
 							<span class="input-group-btn">
-								<input value="Send" class="btn btn-default" onclick="sendMessage()" type="button">
+								<input value="Send" class="btn btn-default" type="button">
 							</span>
 						</div>
 					</form>
+					<script>
+					$(function () {
+						var socket = io();
+						$('#message-form').submit(function(){
+							log("sending message using socket.io");
+							socket.emit('chat message', $('#message').val());
+							$('#message').val('');
+							return false;
+						});
+						socket.on('chat message', function(msg){
+							$('#history').append($('<li>').text(msg));
+							window.scrollTo(0, document.body.scrollHeight);
+						});
+					});
+					</script>
 
 				</div>
 			</div> <!-- chat-body -->
@@ -133,7 +149,7 @@
 			</form> <!-- settings -->
 
 			<!-- nickname chooser -->
-			<form id="nickchooser">
+			<form id="nickchooser" style="display: none;">
 				<div class="form-group panel-body">
 
 					<label for="nickname">Nickname:</label>
