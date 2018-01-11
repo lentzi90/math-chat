@@ -37,15 +37,6 @@ function Chat () {
     this.checkMin = checkMinimized;
 }
 
-function getMessages() {
-    $("#history").load(chatLogPath, function(){
-        // update mathquill content in message
-        $('#history .mathquill-embedded-latex').mathquill();
-        // scrolla ner
-        scrollToBottom();
-    });
-}
-
 // Open chat in window
 function chatWindow() {
     var chatWindow = window.open(chatWindowPath,"Chat", "width=500, height=500");
@@ -56,7 +47,6 @@ function checkNickname() {
     nickname = getCookie("nickname");
     if (nickname != "") {
         showChat();
-        getMessages(); // fill the chat with history
     }
 }
 
@@ -76,7 +66,6 @@ function setNick(nick) {
         // nickname is set, continue...
         document.cookie = "nickname="+nickname+"; path=/";
         showChat();
-        getMessages(); // fill the chat with history
         $("#message").mathquill('latex', '').mousedown().mouseup();
     }
 }
@@ -93,9 +82,6 @@ function checkMinimized() {
 
 // toggle chat minimization
 function toggleChat() {
-    // make sure the chat is scrolled down
-    window.setTimeout(scrollToBottom, 1000);
-
     isMinimized = !isMinimized;
 
     if (isMinimized) {
