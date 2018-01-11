@@ -107,7 +107,7 @@ function toggleChat() {
 
 function checkEnterSendMessage(event) {
     if(event.keyCode == 13) {
-        sendMessage();
+        $("#send").click();
     }
 }
 
