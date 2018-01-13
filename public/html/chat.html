@@ -77,12 +77,14 @@
 			<div id="chat-body" style="display: none;">
 				<div class="panel-body" id="history"></div>
 				<div class="panel-footer">
-					<div class="input-group input-group-sm">
-						<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
-						<span class="input-group-btn">
-							<input value="Send" class="btn btn-default" onclick="sendMessage()" type="button">
-						</span>
-					</div>
+					<form id=message-form>
+						<div class="input-group input-group-sm">
+							<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
+							<span class="input-group-btn">
+								<input id="send" value="Send" class="btn btn-default" type="submit">
+							</span>
+						</div>
+					</form>
 				</div>
 			</div>
 

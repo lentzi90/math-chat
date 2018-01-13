@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+	<title>Chat</title>
+	<meta charset="UTF-8">
+	<link rel="icon" type="image/x-icon" href="images/logo.png" />
+
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<!-- Bootstrap and jQuery -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<script src="../javascripts/mathquill.min.js"></script>
+	<link rel="stylesheet" href="../stylesheets/mathquill.css">
+	<script src="../javascripts/chat.js"></script>
+
+	<style>
+	html, body, .chat {
+		height: 100vh;
+		overflow: hidden;
+		padding: 0;
+	}
+
+
+	.panel {
+		height: 100vh;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.panel-body
+	{
+		overflow-y: auto;
+		height: 100%;
+	}
+
+	.panel-footer {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+	}
+	#message {
+		height: auto;
+	}
+
+	.mathquill-rendered-math * {
+		box-sizing: content-box;
+		top: auto;
+	}
+
+	.mathquill-editable {
+		display: block;
+	}
+
+	.mathquill-textbox textarea{
+		position: absolute;
+		clip: rect(1em 1em 1em 1em);
+	}
+
+	.emathdisplaymode .emdisplaymode-content {
+		width: 100%;
+	}
+	</style>
+</head>
+
+<body>
+
+	<!-- The chat -->
+	<div class="chat">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="chatHeading">
+				<span class="panel-title">Chat</span>
+				<div class="btn-group pull-right" data-toggle="tooltip" title="Settings">
+					<a role="button" onclick="showSettings()" class="btn btn-default btn-sm" id="settings-btn">
+						<span class="glyphicon glyphicon-cog"></span>
+					</a>
+				</div>
+			</div>
+
+			<!-- chat history and message area -->
+			<div id="chat-body" style="display: none;">
+
+				<div class="panel-body" id="history">
+					<!-- Here goes the chat history -->
+				</div>
+
+				<div class="panel-footer" id="messageArea">
+					<form id=message-form>
+						<div class="input-group input-group-sm">
+							<span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
+							<span class="input-group-btn">
+								<input id="send" type="submit" value="Send" class="btn btn-default" type="button">
+							</span>
+						</div>
+					</form>
+				</div>
+			</div> <!-- chat-body -->
+
+			<!-- settings -->
+			<form id="settings" style="display: none;">
+				<div class="panel-body">
+					<div class="form-group">
+						<label for="nickname">Nickname:</label>
+						<input type="text" class="form-control" id="settings-nick">
+					</div>
+
+					<div class="form-group">
+						<button type="button" class="btn btn-default" onclick="showChat()">Back</button>
+						<button type="button" class="btn btn-primary pull-right" onclick="applySettings()">Apply</button>
+					</div>
+				</div>
+
+				<div class="panel-footer">
+					<a role="button" class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Help">
+						<span class="glyphicon glyphicon-question-sign"></span>
+					</a>
+				</div>
+			</form> <!-- settings -->
+
+			<!-- nickname chooser -->
+			<form id="nickchooser">
+				<div class="form-group panel-body">
+
+					<label for="nickname">Nickname:</label>
+					<div class="input-group input-group-sm">
+						<input type="text" class="form-control" id="nick" onkeydown="checkEnterSetNick(event)">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" onclick="setNick()">Ok</button>
+						</span>
+					</div>
+				</div>
+			</form>
+
+		</div> <!-- panel -->
+
+	</div> <!-- chat end -->
+
+
+</body>
+
+</html>

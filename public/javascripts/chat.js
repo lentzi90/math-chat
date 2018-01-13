@@ -1,4 +1,4 @@
-var chatWindowPath = "/index.html";
+var chatWindowPath = "/html/chatwindow.html";
 
 var nickname = "Test";
 
@@ -16,7 +16,8 @@ $(window).load( function() {
         var socket = io();
         // Sending messages
         $('#message-form').submit(function() {
-            socket.emit('chat message', extractMessage());
+            var message = '<div class="bg-info">'+nickname + ':</div>' + extractMessage();
+            socket.emit('chat message', message);
             $('#message').mathquill('latex', '');
             return false;
         });
@@ -25,7 +26,7 @@ $(window).load( function() {
             $('#history').append($('<div>').html(msg));
             $('#history .mathquill-embedded-latex').mathquill('revert');
             $('#history .mathquill-embedded-latex').mathquill();
-            window.scrollTo(0, document.body.scrollHeight);
+            scrollToBottom();
         });
     });
 });
