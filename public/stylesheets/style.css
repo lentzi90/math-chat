@@ -40,7 +40,15 @@ body {
 	clip: rect(1em 1em 1em 1em);
 }
 
+.emathdisplaymode .emdisplaymode-content {
+	width: 100%;
+}
+
 #message {
 	height: auto;
 	overflow: inherit;
+}
+
+#message-form {
+	padding: 0;
 }

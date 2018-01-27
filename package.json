@@ -1,0 +1,12 @@
+{
+  "name": "Math-Chat",
+  "version": "0.0.2",
+  "description": "A simple chat application that supports math using MathQuill.",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}

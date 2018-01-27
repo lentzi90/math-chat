@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- bootstrap, jquery end -->
+    <script src="javascripts/mathquill.min.js"></script>
+    <script src="javascripts/chat.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <link rel="stylesheet" href="stylesheets/mathquill.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Math-chat by lentzi90</title>
+</head>
+
+<body>
+    <header>
+        <div class="inner">
+            <h1>Math-chat</h1>
+            <h2>A basic chat client capable of displaying mathemathical content thanks to MathQuill.</h2>
+            <a href="https://github.com/lentzi90/math-chat" class="button"><small>View project on</small> GitHub</a>
+        </div>
+    </header>
+
+    <div id="content-wrapper">
+        <div class="inner clearfix">
+            <section id="main-content">
+                <h2>
+                    <a id="math-chat" class="anchor" href="#math-chat" aria-hidden="true"><span class="octicon octicon-link"></span></a>Math-chat</h2>
+
+                    <p>This page is used as a demo for the math-chat client. There is no server backend so you can only chat with yourself. :)</p>
+                    <h2>Usage</h2>
+                    <p>The chat uses a MathQuill textbox as input field which means that you can write both normal text and mathematical symbols.
+                        To activate or deactivate the math mode type "$".
+                        For more info on how to use the math mode see <a href="http://mathquill.com/">MathQuill</a>.</p>
+
+                        <!-- The chat -->
+                        <div class="chat hidden-xs" id="chat">
+                            <div class="panel panel-default" id="chatpanel">
+
+                                <!-- chat heading with buttons -->
+                                <div class="panel-heading">
+                                    <span class="panel-title">Chat</span>
+
+                                    <div class="btn-group pull-right" data-toggle="tooltip" title="Open in new window">
+                                        <a role="button" class="btn btn-default btn-sm" href="#" onclick="chatWindow()">
+                                            <span class="glyphicon glyphicon-new-window"></span>
+                                        </a>
+                                    </div>
+                                    <div class="btn-group pull-right" data-toggle="tooltip" title="Minimize">
+                                        <a role="button" onclick="toggleChat()" class="btn btn-default btn-sm collapsed" data-toggle="collapse" data-parent="#chat" href="#collapseChat" aria-expanded="false">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </a>
+                                    </div>
+                                    <div class="btn-group pull-right" data-toggle="tooltip" title="Settings">
+                                        <a role="button" onclick="showSettings()" class="btn btn-default btn-sm" id="settings-btn">
+                                            <span class="glyphicon glyphicon-cog"></span>
+                                        </a>
+                                    </div>
+
+                                </div> <!-- heading end -->
+
+                                <!-- collapsible chat area -->
+                                <div class="panel-collapse collapse" id="collapseChat">
+
+                                    <!-- nickname chooser -->
+                                    <form id="nickchooser">
+
+                                        <div class="panel-body">
+
+                                            <div class="form-group">
+                                                <label for="nickname">Nickname:</label>
+                                                <div class="input-group input-group-sm">
+                                                    <input type="text" class="form-control" id="nick" onkeydown="checkEnterSetNick(event)">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" onclick="setNick()">Ok</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- panel body -->
+
+                                        <div class="panel-footer">
+                                            <a role="button" class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Help">
+                                                <span class="glyphicon glyphicon-question-sign"></span>
+                                            </a>
+                                        </div>
+
+                                    </form> <!-- nickchooser -->
+
+                                    <!-- Settings -->
+                                    <form id="settings" style="display: none;">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="nickname">Nickname:</label>
+                                                <input type="text" class="form-control" id="settings-nick">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-default" onclick="showChat()">Back</button>
+                                                <button type="button" class="btn btn-primary pull-right" onclick="applySettings()">Apply</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-footer">
+                                            <a role="button" class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Help">
+                                                <span class="glyphicon glyphicon-question-sign"></span>
+                                            </a>
+                                        </div>
+                                    </form> <!-- settings -->
+
+                                    <!-- chat history and message area -->
+                                    <div id="chat-body" style="display: none;">
+                                        <div class="panel-body" id="history"></div>
+                                        <div class="panel-footer">
+                                            <form id=message-form>
+                                                <div class="input-group input-group-sm">
+                                                    <span id="message" class="mathquill-textbox form-control" onkeydown="checkEnterSendMessage(event)"></span>
+                                                    <span class="input-group-btn">
+                                                        <input id="send" value="Send" class="btn btn-default" type="submit">
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div> <!-- collapsible area end -->
+
+                            </div> <!-- chat panel -->
+
+                        </div> <!-- chat end -->
+
+
+
+
+                    </section>
+
+                    <aside id="sidebar">
+                        <a href="https://github.com/lentzi90/math-chat/zipball/master" class="button">
+                            <small>Download</small>
+                            .zip file
+                        </a>
+                        <a href="https://github.com/lentzi90/math-chat/tarball/master" class="button">
+                            <small>Download</small>
+                            .tar.gz file
+                        </a>
+
+                        <p class="repo-owner"><a href="https://github.com/lentzi90/math-chat"></a> is maintained by <a href="https://github.com/lentzi90">lentzi90</a>.</p>
+
+                        <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+                    </aside>
+                </div>
+            </div>
+
+
+        </body>
+        </html>
