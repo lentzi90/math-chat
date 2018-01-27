@@ -66,7 +66,7 @@
 	</style>
 </head>
 
-<body>
+<body onresize="resizeChat()">
 
 	<!-- The chat -->
 	<div class="chat">
@@ -138,7 +138,16 @@
 
 	</div> <!-- chat end -->
 
-
+	<script>
+	function resizeChat() {
+		document.getElementById("history").style.height = window.innerHeight - $("#chatHeading").height() - $("#messageArea").height()
+		- parseInt($("#history").css("padding-top")) - 2*parseInt($("#history").css("padding-bottom"))+"px";
+		scrollToBottom();
+	}
+	jQuery(document).ready(function($) {
+		resizeChat();
+	});
+	</script>
 </body>
 
 </html>
